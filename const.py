@@ -1,0 +1,2 @@
+APPLICATION_NAME_COLUMN_NAME = "Application Name"
+FLAW_ID_COLUMN_NAME = "Flaw ID"
