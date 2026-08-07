@@ -83,7 +83,7 @@ def main():
             required=True,
         )
         parser.add_argument(
-            "mitigation_approval_comment",
+            "--mitigation_approval_comment",
             help="Mitigation approval comment to apply to each finding",
             required=True,
         )

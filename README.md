@@ -25,7 +25,7 @@ Otherwise you will need to set environment variables:
 
     export VERACODE_API_KEY_ID=<YOUR_API_KEY_ID>
     export VERACODE_API_KEY_SECRET=<YOUR_API_KEY_SECRET>
-    python custom-field-to-collections.py (arguments)
+    python bulk-mitigate.py (arguments)
 
 Arguments supported include:
 * `--input_file`  Path to the Excel file containing findings to mitigate
