@@ -5,6 +5,7 @@ from veracode_api_py import Applications, Findings
 from const import APPLICATION_NAME_COLUMN_NAME, FLAW_ID_COLUMN_NAME
 
 def read_findings_from_excel(file_path):
+    print(f"Reading findings from Excel file: {file_path}")
     app_name_to_itens_to_mitigate = dict()
 
     with pd.ExcelFile(file_path) as excel_file:
@@ -21,6 +22,7 @@ def read_findings_from_excel(file_path):
 
 def try_get_application_guid(application_name, attempt=1):
     try:
+        print(f"Retrieving application GUID for '{application_name}' (Attempt {attempt})...")
         applications = Applications().get_by_name(application_name)
         if applications:
             return next((application["guid"] for application in applications if application["profile"]["name"] == application_name))
@@ -36,6 +38,7 @@ def try_get_application_guid(application_name, attempt=1):
 
 def try_propose_mitigation(application_guid, issue_list, mitigation_proposal, mitigation_type, attempt=1):
     try:
+        print(f"    Proposing mitigation for issues {issue_list} (Attempt {attempt})...")
         Findings().add_annotation(app=application_guid, issue_list=issue_list, comment=mitigation_proposal, action=mitigation_type)
         print(f"    Proposed mitigation for issues {issue_list}.")
         return True
@@ -51,6 +54,7 @@ def try_propose_mitigation(application_guid, issue_list, mitigation_proposal, mi
 
 def try_approve_mitigation(application_guid, issue_list, mitigation_approval_comment, attempt=1):
     try:
+        print(f"    Approving mitigation for issues {issue_list} (Attempt {attempt})...")
         Findings().add_annotation(app=application_guid, issue_list=issue_list, comment=mitigation_approval_comment, action="ACCEPTED")
         print(f"    Approved mitigation for issues {issue_list}.")
     except Exception as e:
